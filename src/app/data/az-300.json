@@ -1,0 +1,77 @@
+[
+    {
+        "question": "You have two subscriptions named Subscription1 and Subscription2. Each subscription is associated to a different Azure AD tenant. <br><br>Subscription1 contains a virtual network named VNet1. VNet1 contains an Azure virtual machine named VM1 and has an IP address space of 10.0.0.0/16. <br><br>Subscription2 contains a virtual network named VNet2. Vnet2 contains an Azure virtual machine named VM2 and has an IP address space of 10.10.0.0/24. <br><br>You need to connect VNet1 to VNet2. <br><br>What should you do first?",
+        "choices": [
+        {
+            "id": 1,
+            "label": "Modify the IP address space of VNet2.",
+            "isCorrect": 0
+        },
+        {
+            "id": 2,
+            "label": "Move VM1 to Subscription2.",
+            "isCorrect": 0
+        },
+        {
+            "id": 3,
+            "label": "Provision virtual network gateways.",
+            "isCorrect": 1
+        },
+        {
+            "id": 4,
+            "label": "Move VNet1 to Subscription2.",
+            "isCorrect": 0
+        }
+        ]
+    },
+    {
+        "question": "You have an Azure Active Directory (Azure AD) tenant.<br><br>You have an existing Azure AD conditional access policy named Policy1. Policy1 enforces the use of Azure AD-joined devices when members of the Global Administrators group authenticate to Azure AD from untrusted locations.<br><br>You need to ensure that members of the Global Administrators group will also be forced to use multi-factor authentication when authenticating from untrusted locations.",
+        "choices": [
+        {
+            "id": 1,
+            "label": "From the Azure portal, modify session control of Policy1.",
+            "isCorrect": 0
+        },
+        {
+            "id": 2,
+            "label": "From multi-factor authentication page, modify the user settings.",
+            "isCorrect": 0
+        },
+        {
+            "id": 3,
+            "label": "From multi-factor authentication page, modify the service settings.",
+            "isCorrect": 0
+        },
+        {
+            "id": 4,
+            "label": "From the Azure portal, modify grant control of Policy1.",
+            "isCorrect": 1
+        }
+        ]
+    },
+    {
+        "question": "You have an Azure subscription named Subscription1 that contains an Azure virtual machine named VM1. VM1 is in a resource group named RG1.<br><br>VM1 runs services that will be used to deploy resources to RG1.<br><br>You need to ensure that a service running on VM1 can manage the resources in RG1 by using the identity of VM1.<br><br>What should you do first?",
+        "choices": [
+        {
+            "id": 1,
+            "label": "From the Azure portal, modify the Access control (IAM) settings of RG1.",
+            "isCorrect": 0
+        },
+        {
+            "id": 2,
+            "label": "From the Azure portal, modify the Policies settings of RG1.",
+            "isCorrect": 0
+        },
+        {
+            "id": 3,
+            "label": "From the Azure portal, modify the Access control (IAM) settings of VM1.",
+            "isCorrect": 0
+        },
+        {
+            "id": 4,
+            "label": "From the Azure portal, modify the value of the Managed Service Identity option for VM1.",
+            "isCorrect": 1
+        }
+        ]
+    }
+]
