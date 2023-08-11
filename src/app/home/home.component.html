@@ -1,54 +1,26 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button>
-    <mat-icon>menu</mat-icon>
-    </button>
     <span>My Reviewer</span>
-    <span class="example-spacer"></span>
 </mat-toolbar>
 
 <div class="m-4">
+    <ng-container *ngIf="!endOfExam">
+        <app-question-area 
+            [currentQuestion]="currentQuestion"
+            [areChoicesShuffled]="areChoicesShuffled" 
+            [endOfExam]="endOfExam" 
+            [questionCtr]="questionCtr" 
+            [totalQuestions]="totalQuestions"
+            [currentChoices]="currentChoices"
+            [showAnswers]="showAnswers"
+            (showTheAnswers)="showTheAnswers()"
+            (submitAnswers)="submitAnswers($event)"
+            (previousQuestion)="getPreviousQuestion()"
+            (shuffleChoices)="shuffleChoices()">
+        </app-question-area>
+    </ng-container>
+    <ng-container *ngIf="endOfExam">
+        <app-result [currentQuestions]="currentQuestions">
+        </app-result>
+    </ng-container>
 
-    <mat-card *ngIf="!endOfExam" class="d-flex align-items-center">
-        <section class="align-self-start">
-            <mat-slide-toggle [(ngModel)]="areChoicesShuffled" (change)="shuffleChoices()">SHUFFLE CHOICES</mat-slide-toggle>
-        </section>
-        <mat-card-header>
-            <mat-card-title>Question {{questionCtr}} of {{totalQuestions}}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content style="max-width: 1000px;">
-            <p *ngIf="currentQuestion" class="question mt-3" [innerHtml]="currentQuestion.question"></p>
-            <mat-divider class="my-4"></mat-divider>
-            <ng-container *ngFor="let choice of currentChoices">
-                <div class="choice-container" [ngClass]="{'highlight': !!choice.isCorrect && !!showAnswers}">
-                    <mat-checkbox [(ngModel)]="choice.isSelected">{{choice.label}}</mat-checkbox>
-                </div>
-            </ng-container>
-        </mat-card-content>
-        <mat-card-actions class="my-3">
-            <button (click)="showTheAnswers()" mat-button>Show Answers</button>
-            <button *ngIf="!endOfExam" (click)="submitAnswers()" class="ml-5" mat-button>Next</button>
-        </mat-card-actions>
-    </mat-card>
-
-    <mat-card *ngIf="endOfExam" class="d-flex flex-column align-items-center" >
-        <mat-card-header>
-            <mat-card-title>Your Score: {{score}}/{{totalQuestions}}</mat-card-title>
-            <mat-card-title *ngIf="wrongItems.length === 0" class="text-success">Perfect Score!</mat-card-title>
-        </mat-card-header>
-        <mat-card-content *ngIf="wrongItems.length > 0" style="max-width: 1000px;">
-            <h2>Wrong Items</h2>
-            <mat-card *ngFor="let item of wrongItems; let i = index" class="my-4">
-                <mat-card-content>
-                    <h4>Item #{{i + 1}}</h4>
-                    <p style="white-space: pre-line;">{{item.question}}</p>
-                    <div *ngFor="let choice of item.choices">
-                        <div class="choice-div" [ngClass]="{'highlight': !!choice.isCorrect}">
-                            <input type="checkbox" disabled [(ngModel)]="choice.isSelected" />
-                            <span>{{choice.label}}</span>
-                        </div>
-                    </div>
-                </mat-card-content>
-            </mat-card>
-        </mat-card-content>
-    </mat-card>
 </div>

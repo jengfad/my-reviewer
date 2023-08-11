@@ -1,0 +1,23 @@
+<mat-card class="d-flex align-items-center">
+    <section class="align-self-start">
+        <mat-slide-toggle [(ngModel)]="areChoicesShuffled" (change)="onShuffleChoices()" class="mx-3">SHUFFLE CHOICES</mat-slide-toggle>
+        <button mat-raised-button color="primary" class="mx-3">Edit Question Set</button>
+    </section>
+    <mat-card-header class="mt-3">
+        <mat-card-title>Question {{questionCtr + 1}} of {{totalQuestions}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="my-3" style="max-width: 1000px;">
+        <p *ngIf="currentQuestion" class="question mt-3" [innerHtml]="currentQuestion.question"></p>
+        <mat-divider class="my-4"></mat-divider>
+        <ng-container *ngFor="let choice of currentChoices">
+            <div class="choice-container" [ngClass]="{'highlight': !!choice.isCorrect && !!showAnswers}">
+                <mat-checkbox [(ngModel)]="choice.isSelected">{{choice.label}}</mat-checkbox>
+            </div>
+        </ng-container>
+    </mat-card-content>
+    <mat-card-actions class="my-5">
+        <button class="mx-3" (click)="onShowTheAnswers()" mat-raised-button>Show Answers</button>
+        <button class="mx-3" (click)="onPreviousQuestion()" mat-raised-button>Previous</button>
+        <button *ngIf="!endOfExam" (click)="onSubmitAnswers()" class="mx-3" mat-raised-button>Submit Answer & Next</button>
+    </mat-card-actions>
+</mat-card>

@@ -4,7 +4,7 @@ import { IQuestion } from '../models/question';
 import { IChoice } from '../models/choice';
 
 @Component({
-  selector: 'home',
+  selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
@@ -18,7 +18,6 @@ export class HomeComponent {
   currentQuestion: IQuestion | undefined = undefined;
   showAnswers = false;
 
-  score = 0;
   questionCtr = 0;
   ogList: IQuestion[] = [];
   totalQuestions = 0;
@@ -28,11 +27,10 @@ export class HomeComponent {
 
   endOfExam = false;
 
-  wrongItems: IQuestion[] = [];
-
   ngOnInit() {
     this.initializeQuestions();
-    this.getNextQuestion();
+    this.currentQuestion = this.currentQuestions[this.questionCtr];
+    this.setCurrentChoices();
   }
 
   private initializeQuestions() {
@@ -51,16 +49,24 @@ export class HomeComponent {
   }
 
   getNextQuestion() {
-    if (this.currentQuestions.length === 0){
+    if (this.currentQuestions.length - 1 === this.questionCtr){
       this.endOfExam = true;
       return;
     };
 
     this.showAnswers = false;
-    this.currentQuestion = this.currentQuestions.pop();
-    this.questionCtr++;
+    this.questionCtr = this.questionCtr + 1;
+    this.currentQuestion = this.currentQuestions[this.questionCtr];
 
     this.setCurrentChoices();
+  }
+
+  getPreviousQuestion() {
+    if (this.questionCtr === 0) return;
+    this.questionCtr = this.questionCtr - 1;
+    this.currentQuestion = this.currentQuestions[this.questionCtr];
+    this.setCurrentChoices();
+    this.endOfExam = false;
   }
 
   setCurrentChoices() {
@@ -73,23 +79,17 @@ export class HomeComponent {
     this.showAnswers = true;
   }
 
-  submitAnswers() {
-    const selected = this.currentChoices.filter(x => x.isSelected).map(x => x.id);
-    const correct = this.currentChoices.filter(x => x.isCorrect).map(x => x.id);
-    const isUserCorrect = JSON.stringify(selected.sort()) === JSON.stringify(correct.sort());
-
-    if (isUserCorrect) {
-      this.score++;
-    } else {
-      if (this.currentQuestion) {
-        let wrong = {
-          question: this.currentQuestion.question.replace(/<br><br>/gi, "\n"),
-          choices: this.currentChoices
-        };
-        this.wrongItems.push(wrong);
-      }
-    }
+  submitAnswers(selectedChoices: string[]) {
+    this.updateAnsweredQuestions(selectedChoices);
     this.getNextQuestion();
+  }
+
+  updateAnsweredQuestions(selectedChoices: string[]) {
+    if (this.currentQuestion) {
+      this.currentQuestion.choices.forEach(choice => {
+        choice.isSelected = selectedChoices.some(label => label === choice.label);
+      });
+    }
   }
 
   private shuffle(input: any) {

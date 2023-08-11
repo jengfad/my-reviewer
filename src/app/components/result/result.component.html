@@ -1,0 +1,21 @@
+<mat-card class="d-flex flex-column align-items-center" >
+    <mat-card-header class="p-3">
+        <mat-card-title>Your Score: {{score}}/{{totalQuestions}}</mat-card-title>
+        <mat-card-title *ngIf="wrongItems.length === 0" class="text-success">Perfect Score!</mat-card-title>
+    </mat-card-header>
+    <mat-card-content *ngIf="wrongItems.length > 0" style="max-width: 1000px;">
+        <h2>Wrong Items</h2>
+        <p>Correct answers in <label class="highlight">yellow</label></p>
+        <mat-card *ngFor="let item of wrongItems; let i = index" class="my-4">
+            <mat-card-content>
+                <h4>Item #{{i + 1}}</h4>
+                <p style="white-space: pre-line;">{{item.question}}</p>
+                <div *ngFor="let choice of item.choices">
+                    <div class="choice-div" [ngClass]="{'highlight': !!choice.isCorrect}">
+                        <mat-checkbox disabled [(ngModel)]="choice.isSelected">{{choice.label}}</mat-checkbox>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </mat-card-content>
+</mat-card>
