@@ -12,7 +12,7 @@
             [totalQuestions]="totalQuestions"
             [currentChoices]="currentChoices"
             [showAnswers]="showAnswers"
-            (showTheAnswers)="showTheAnswers()"
+            (toggleAnswerDisplay)="toggleAnswerDisplay($event)"
             (submitAnswers)="submitAnswers($event)"
             (previousQuestion)="getPreviousQuestion()"
             (shuffleChoices)="shuffleChoices()">

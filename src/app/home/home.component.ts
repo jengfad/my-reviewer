@@ -75,8 +75,8 @@ export class HomeComponent {
                             : this.currentQuestion?.choices;
   }
 
-  showTheAnswers() {
-    this.showAnswers = true;
+  toggleAnswerDisplay(val: boolean) {
+    this.showAnswers = val;
   }
 
   submitAnswers(selectedChoices: string[]) {

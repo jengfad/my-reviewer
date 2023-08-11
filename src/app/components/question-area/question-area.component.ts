@@ -17,15 +17,15 @@ export class QuestionAreaComponent {
     @Input() currentChoices: IChoice[] = [];
     @Output() submitAnswers = new EventEmitter<string[]>();
     @Output() previousQuestion = new EventEmitter<void>();
-    @Output() showTheAnswers = new EventEmitter<void>();
+    @Output() toggleAnswerDisplay = new EventEmitter<boolean>();
     @Output() shuffleChoices = new EventEmitter<void>();
 
     onShuffleChoices() {
         this.shuffleChoices.emit();
     }
 
-    onShowTheAnswers() {
-        this.showTheAnswers.emit();
+    onToggleAnswerDisplay(val: boolean) {
+        this.toggleAnswerDisplay.emit(val);
     }
 
     onPreviousQuestion() {
