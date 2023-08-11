@@ -1,0 +1,11 @@
+<mat-card>
+    <mat-card-content>
+        <mat-form-field class="w-100">
+            <mat-label>Leave a comment</mat-label>
+            <textarea matInput [value]="jsonData"></textarea>
+        </mat-form-field>      
+    </mat-card-content>
+    <mat-card-actions>
+        <button (click)="activeModal.close('Close click')" mat-raised-button>Close</button>
+    </mat-card-actions>
+</mat-card>

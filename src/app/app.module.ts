@@ -13,15 +13,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { DataModalComponent } from './components/data-modal/data-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ResultComponent,
-    QuestionAreaComponent
+    QuestionAreaComponent,
+    DataModalComponent
   ],
   imports: [
     BrowserModule,
@@ -31,8 +35,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     BrowserAnimationsModule,
     MatIconModule,
     MatButtonModule,
+    MatInputModule,
     MatCheckboxModule,
     MatToolbarModule,
+    MatFormFieldModule,
     MatDividerModule,
     MatSlideToggleModule,
     MatCardModule
