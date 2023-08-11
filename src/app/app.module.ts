@@ -17,7 +17,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { DataModalComponent } from './components/data-modal/data-modal.component';
+import { DataModalComponent } from './components/modals/data-modal/data-modal.component';
+import { SimpleModalComponent } from './components/modals/simple-modal/simple-modal.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { DataModalComponent } from './components/data-modal/data-modal.component
     HomeComponent,
     ResultComponent,
     QuestionAreaComponent,
-    DataModalComponent
+    DataModalComponent,
+    SimpleModalComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

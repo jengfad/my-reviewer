@@ -14,5 +14,13 @@ export class DataModalComponent implements OnInit {
 
   ngOnInit() {
   }
+  
+  save() {
+    this.activeModal.close(this.jsonData);
+  }
+
+  close() {
+    this.activeModal.close(null);
+  }
 
 }

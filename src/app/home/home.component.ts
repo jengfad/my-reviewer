@@ -10,10 +10,10 @@ import { IChoice } from '../models/choice';
 })
 export class HomeComponent {
   areQuestionsShuffled = true;
+  areChoicesShuffled = true;
+
   firstQuestion = 1;
   endQuestion = 0;
-
-  areChoicesShuffled = true;
   
   currentQuestion: IQuestion | undefined = undefined;
   showAnswers = false;
@@ -33,12 +33,12 @@ export class HomeComponent {
     this.setCurrentChoices();
   }
 
-  private initializeQuestions() {
-    this.ogList = JSON.parse(JSON.stringify(jsonData))['default'];
-
+  private initializeQuestions(inputJson: string | null = null) {
+    this.ogList = inputJson 
+      ? JSON.parse(inputJson)
+      : JSON.parse(JSON.stringify(jsonData))['default']
     this.totalQuestions = this.ogList.length;
     this.endQuestion = this.ogList.length;
-    
     this.currentQuestions = this.areQuestionsShuffled 
                               ? this.shuffle(this.ogList.reverse())
                               : this.ogList.reverse();
@@ -90,6 +90,27 @@ export class HomeComponent {
         choice.isSelected = selectedChoices.some(label => label === choice.label);
       });
     }
+  }
+
+  onChangeQuestionSet(questionJson: string) {
+    this.questionCtr = 0;
+    this.initializeQuestions(questionJson);
+    this.currentQuestion = this.currentQuestions[this.questionCtr];
+    this.setCurrentChoices();
+  }
+
+  resetExam() {
+    this.questionCtr = 0;
+    this.endOfExam = false;
+
+    this.currentQuestions.forEach(q => {
+      q.choices.forEach(c => {
+        c.isSelected = false;
+      })
+    })
+
+    this.currentQuestion = this.currentQuestions[this.questionCtr];
+    this.setCurrentChoices();
   }
 
   private shuffle(input: any) {

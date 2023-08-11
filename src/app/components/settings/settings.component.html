@@ -1,0 +1,5 @@
+<section class="align-self-start">
+    <mat-slide-toggle [(ngModel)]="areChoicesShuffled" (change)="onShuffleChoices()" class="mx-3">SHUFFLE CHOICES</mat-slide-toggle>
+    <button (click)="openDataModal()" mat-raised-button color="primary" class="mx-3">Edit Question Set</button>
+    <button (click)="onResetExam()" mat-raised-button color="primary" class="mx-3">Retake Exam</button>
+</section>

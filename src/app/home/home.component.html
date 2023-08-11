@@ -1,22 +1,27 @@
-<mat-toolbar color="primary">
-    <span>My Reviewer</span>
+<mat-toolbar color="primary" class="d-flex">
+    <div>My Reviewer</div>
 </mat-toolbar>
-
+<div class="m-4">
+    <app-settings
+        [currentQuestions]="currentQuestions"
+        [areChoicesShuffled]="areChoicesShuffled"
+        (resetExam)="resetExam()"
+        (changeQuestionSet)="onChangeQuestionSet($event)"
+        (shuffleChoices)="shuffleChoices()">
+    </app-settings>
+</div>
 <div class="m-4">
     <ng-container *ngIf="!endOfExam">
         <app-question-area 
             [currentQuestion]="currentQuestion"
-            [areChoicesShuffled]="areChoicesShuffled" 
             [endOfExam]="endOfExam" 
             [questionCtr]="questionCtr" 
             [totalQuestions]="totalQuestions"
             [currentChoices]="currentChoices"
             [showAnswers]="showAnswers"
-            [currentQuestions]="currentQuestions"
             (toggleAnswerDisplay)="toggleAnswerDisplay($event)"
             (submitAnswers)="submitAnswers($event)"
-            (previousQuestion)="getPreviousQuestion()"
-            (shuffleChoices)="shuffleChoices()">
+            (previousQuestion)="getPreviousQuestion()">
         </app-question-area>
     </ng-container>
     <ng-container *ngIf="endOfExam">
